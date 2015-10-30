@@ -1,0 +1,389 @@
+%%%%%%%%% MASTER -- compiles the 4 sections
+
+\documentclass[10pt,letterpaper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %% (It is recommended that you       %%
+\setlength{\evensidemargin}{0in}  %%  not change these parameters,     %%
+\setlength{\textheight}{8.5in}    %%  at the risk of having your       %%
+\setlength{\topmargin}{0in}       %%  proposal dismissed on the basis  %%
+\setlength{\headheight}{-40pt}      %%  of incorrect formatting!!!)      %%
+\setlength{\headsep}{65pt}         %%                                   %%
+\setlength{\footskip}{0.3in}       %%                                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%
+\newcommand{\required}[1]{\section*{\hfil #1\hfil}}                    %%
+\renewcommand{\refname}{\hfil References Cited\hfil}                   %%
+\bibliographystyle{plain}                                              %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%PUT YOUR MACROS HERE
+
+\usepackage{hyphenat}
+\usepackage{layout}
+
+\usepackage{verbatim} 
+\usepackage{cite}
+\usepackage[pdftex]{graphicx}
+\usepackage{setspace}
+\usepackage[cmex10]{amsmath}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+\usepackage{subfig}
+\usepackage{caption}
+
+%\usepackage[caption=false]{subfig}
+
+%\usepackage{subcaption}
+%\captionsetup{compatibility=false}
+
+\usepackage{mathpazo}
+
+\linespread{1.05}      % Palatino needs more leading (space between lines)
+
+\usepackage{euler}
+
+\usepackage{url}
+
+%\usepackage{courier}
+%\renewcommand{\familydefault}{\sfdefault}
+
+%\usepackage[compact]{titlesec}
+%\addtolength{\itemsep}{-0.05in}
+%\usepackage{subcaption}
+\usepackage{paralist}
+
+\usepackage{tikz}
+
+\usepackage{wrapfig}
+
+\usepackage[utf8]{inputenc}
+
+
+%---------------------------------------------------------------------------------%
+%*********************************************************************************%
+%---------------------------------------------------------------------------------%
+
+
+\title{\textbf{CSR:Small:Exploring Timing-Energy Tradeoffs on Heterogeneous Computing Platforms}}
+
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+%\pagestyle{fancy}
+%\includeonly{NSFsumm}
+
+\date{\vspace{4mm}}
+
+%\doublespace
+
+\begin{document}
+
+%\layout
+
+\maketitle
+\pagenumbering{arabic}
+
+
+%---------------------------------------------------------------------------------%
+%*********************************************************************************%
+%---------------------------------------------------------------------------------%
+\newpage 
+
+\begin{center}
+\Large{\textbf{Project Summary}}
+\end{center}
+
+\paragraph{Summary.}
+
+\paragraph{Intellectual merit.} 
+
+\paragraph{Broader impacts.}
+
+\paragraph{Keywords:} 
+
+%---------------------------------------------------------------------------------%
+%*********************************************************************************%
+%---------------------------------------------------------------------------------%
+\newpage 
+
+\section{Introduction}
+\label{sec:intro}
+\input{introduction.tex}
+
+%*********************************************************************************%
+%*********************************************************************************%
+
+\section{Background and Related Work}
+\label{sec:motivation}
+\input{background.tex}
+
+%*********************************************************************************%
+
+\subsection{Hardware Platform}
+\label{sec:hardware}
+\input{hardware.tex}
+
+%*********************************************************************************%
+
+\subsection{Real-Time Scheduling Algorithms and Schedulability Tests}
+\label{sec:model}
+\input{model.tex}
+
+
+%*********************************************************************************%
+
+\subsection{Related Work}
+\label{sec:relatedwork}
+\input{relatedwork.tex}
+
+%*********************************************************************************%
+%*********************************************************************************%
+
+\section{Detailed Research Plan}
+\label{sec:researchplan}
+\input{researchplan.tex}
+
+%*********************************************************************************%
+
+\subsection{Step 1: Identifying Energy-Efficient Configurations that Guarantee Timing}
+\label{sec:step1}
+\input{step1.tex}
+
+%*********************************************************************************%
+
+\subsection{Step 2: ...}
+\label{sec:step2}
+\input{step2.tex}
+
+%*********************************************************************************%
+
+\subsection{Step 3: Implementation and Overhead-Conscious Schedulability Studies}
+\label{sec:step3}
+\input{step3.tex}
+
+%*********************************************************************************%
+
+\subsection{Step 4: Conduct Case Studies}
+\label{sec:step4}
+\input{step4.tex}
+
+%*********************************************************************************%
+
+\subsection{Timeline}
+\label{sec:timeline}
+\input{timeline.tex}
+
+%*********************************************************************************%
+%*********************************************************************************%
+
+\section{Broader Impact of the Proposed Work}
+\label{sec:impact}
+\input{impact.tex}
+
+
+%*********************************************************************************%
+%*********************************************************************************%
+\newpage
+\pagenumbering{gobble}
+
+\bibliographystyle{plain} 
+\bibliography{b1,b2,b3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\pagenumbering{gobble}
+\thispagestyle{empty}
+
+\required{Cong Liu}
+\vspace{-3mm}
+\begin{center}
+Department of Computer Science, University of Texas at Dallas, Richardson, TX 75081
+http://www.utdallas.edu/$\sim$cong/
+\end{center}
+
+
+\noindent \textbf{Professional Preparation}\
+
+	\begin{tabular}{l l l}
+		Wuhan Univ. of Technology &  Computer Science & B.S. with honor, 2005 \\
+		Auburn Univ. & Computer Science & M.S., 2008 \\
+		Univ. of North Carolina at Chapel Hill & Computer Science & Ph.D., 2013\\ \\
+	\end{tabular}
+
+\noindent \textbf{Appointments}\
+
+	\hspace{1mm} Assistant Professor, Department of Computer Science, University of Texas at Dallas, 9/13-present. \\
+	
+\noindent \textbf{Products} 
+
+\hspace{-4mm} \textbf{(i) Most Relevant Publications}\  
+	\vspace{-1mm}
+	\begin{itemize}
+
+\item 
+Husheng Zhou and Cong Liu, ``\textit{Task Mapping in Heterogeneous Embedded Systems for Fast Completion Time}'', Proceedings of the 14th ACM International Conference on Embedded Software (\underline{EMSOFT}), 2014.
+
+\item
+Guangmo Tong and Cong Liu, ``\textit{Supporting Soft Real-Time Sporadic Task Systems on Heterogeneous Multiprocessors with No Uilitzation Loss}'', IEEE Transactions on Parallel and Distributed Systems (\underline{TPDS}), 2015.
+
+	
+\item
+Husheng Zhou, Guangmo Tong, and Cong Liu, ``\textit{GPES: A Preemptive Execution System for GPGPU Computing}'', Proceedings of the 21st IEEE Real-Time and Embedded Technology and Applications Symposium (\underline{RTAS}), 2015.
+
+
+\item  	Cong Liu, Jian Li, Wei Huang, Juan Rubio, and Evan Speight, ``\textit{Power-Efficient Time-Sensitive Mapping in CPU/GPU Heterogeneous Systems},'' Proceedings of the 21st International Conference on Parallel Architectures and Compilation Techniques (\underline{PACT}), pp. 23-32, 2012.
+
+\item Guangmo Tong and Cong Liu, ``\textit{Supporting Read/Write Applications in Embedded Real-time Systems via Suspension-aware Analysis}'', Proceedings of the 14th ACM International Conference on Embedded Software (\underline{EMSOFT}), 2014.
+
+
+
+
+
+\end{itemize}
+\hspace{-4mm} \textbf{(ii) Additional Products}\  
+\vspace{-1mm}
+	\begin{itemize}
+	
+
+
+%\vspace{-2mm}
+%\item 	Liang He, Linghe Kong, Siyu Lin, Shaodong Ying, Yu Gu, Tian he, and Cong Liu, ``\textit{Reconfiguration-Assisted Charging in Large-Scale Lithium-ion Battery Systems},'' Proceedings of the 5th ACM/IEEE International Conference on Cyber-Physical Systems \sloppy(\underline{ICCPS}), 2014.
+
+
+\item
+Jianjia Chen, Wenhung Huang, and Cong Liu, ``\textit{K2U: A General Framework from k-Point Effective Schedulabiliy Analysis to Utilization-based Tests}'', Proceedings of the 36th IEEE Real-Time Systems Symposium (\underline{RTSS}), 2015
+
+\item
+Jianjia Chen and Cong Liu, ``\textit{Fixed-Relative-Deadline Scheduling of Hard Real-Time Tasks with Self-Suspen- sions}'', Proceedings of the 35th IEEE Real-Time Systems Symposium (\underline{RTSS}), 2014.
+
+
+\item 
+Cong Liu and Jianjia Chen, ``\textit{Bursty-Interference Analysis Techniques for Analyzing Complex Real-Time Task Models}'', Proceedings of the 35th IEEE Real-Time Systems Symposium (\underline{RTSS}), 2014.
+
+\vspace{-2mm}
+\item 	Cong Liu and James Anderson, ``An O(m) Analysis Technique for Supporting Real-Time Self-Suspending Task Systems,'' Proceedings of the 33th IEEE Real-Time Systems Symposium (\underline{RTSS}), pp. 373-382, 2012.
+
+%\vspace{-2mm}
+%\item 	Cong Liu and James Anderson, ``\textit{Supporting Soft Real-Time DAG-based Systems on Multiprocessors with No Utilization Loss}," Proceedings of the 31st IEEE Real-Time Systems Symposium (\underline{RTSS}), pp. 3-13, 2010.
+
+\vspace{-2mm}
+\item Cong Liu and James Anderson, ``Task Scheduling with Self-Suspensions in Soft Real-Time Multiprocessor Systems,'' Proceedings of the 30th IEEE Real-Time Systems Symposium (\underline{RTSS}), pp.425-436, 2009,  \textbf{Best Student Paper Award.}
+
+\end{itemize}
+	
+\newpage 
+
+\noindent \textbf{Synergistic Activities}\
+	\begin{changemargin}{4mm}{2mm}
+	\textbf{Service to the Scientific and Engineering Community}\
+	\vspace{-1mm}
+		\begin{changemargin}{2mm}{2mm}	
+		-  TPC, IEEE Real-Time and Embedded Technology and Applications Symposium (RTAS), 2015, 2016. \\
+		 -   TPC, IEEE Real-Time Systems Symposium (RTSS), 2014, 2015. \\
+			- TPC, Euromicro Conference on Real-Time Systems  (ECRTS), 2016.
+			% Technical Program Committee Member, International Conference on High Performance Compilation, Computing and Communications, 2014.
+			
+			%\textit{Reviewer}: IEEE Transactions on Computers, IEEE Transactions on Parallel and Distributed Systems; IEEE Transactions on Industrial Informatics; ACM Transactions on Embedded Computing Systems; Real-Time Systems; Journal of Systems Architecture; Journal of Parallel and Distributed Computing; IEEE Real-TIme and Embedded Technology and Applications Symposium; IEEE Real-Time Systems Symposium; IEEE Real-TIme and Embedded Computing Systems and Applications; Euromicro Conference on Real-Time Systems; IEEE International Conference on Computer Communications;
+			
+		\end{changemargin}
+	\end{changemargin}
+	
+	
+\noindent \textbf{Collaborators and Other Affiliations}\\
+
+\vspace{-2mm}
+	\hspace{-2mm} \textbf{(i) Collaborators}\  
+	\begin{changemargin}{8mm}{2mm}
+	\vspace{-2mm}
+	Dr. Evan Speight, IBM Research Austin Lab; \\
+	Dr. Jian Li IBM Research Austin Lab;\\
+	 Dr. Tian He, University of Minnesota, Twin City; \\
+	  Dr. Jianjia Chen, TU Dortmund (German);\\
+	   Dr. Yu Gu, Singapore University of Technology and Design (Singapore);\\
+	    Dr. Wei Gao, University of Tennessee, Knoxville; \\
+	    Dr. Shinpei Kato, Nagoya University (Japan).
+	\end{changemargin}
+	
+	\hspace{-4mm} \textbf{(ii) Graduate and Post-doctoral Advisors}\  
+	\begin{changemargin}{8mm}{2mm}
+	Dr. James Anderson, Professor, Department of Computer Science, University of North Carolina at Chapel Hill.
+	\end{changemargin}
+	
+	\hspace{-4mm} \textbf{(iii) Thesis Advisor and Post-graduate Scholar Sponsor}\  
+	\begin{changemargin}{8mm}{2mm}
+
+	Mr. Guangmo Tong, PhD Student, Computer Science, UTD (since 2014)
+		
+	Mr. Husheng Zhou, PhD Student, Computer Science, UTD (since 2014)	
+	
+	Ms. Xia Zhang, PhD Student, Computer Science, UTD (since 2014)	
+	
+	Mr. Yuchuan Liu, PhD Student, Computer Science, UTD (since 2015)
+
+	Mr. Gbadebo Ayoade, Masters Student, Computer Science, UTD (since 2013)	
+
+	\end{changemargin}
+
+
+%---------------------------------------------------------------------------------%
+%---------------------------------------------------------------------------------%
+\newpage
+\pagenumbering{gobble}
+
+\begin{center}
+\Large{\textbf{\\Facilities, Equipment, and Other Resources}}
+\end{center}
+
+\paragraph{General computing environment.} The Department of Computer Science hosts more than 40 research labs with access 24 hours a day, 7 days a week; 2 open labs for graduate students; and a 128-seat open access lab for undergraduate students. These labs consist of over 500 state-of-the-art, high-performance workstations and high-end PCs, all connected via gigabit Ethernet switches with a redundant fiber up-link to provide fast access to the campus network and the Internet. Nine classrooms and one large lecture hall with the latest computer and audio-visual equipment are available. Academic coursework, project, and computing systems are comprised of Linux x86\_64, Windows Server, and Solaris 10 executing on a collection of physical servers and virtual server private clouds. The servers are connected via fiber channel and iSCSI to a thin-provisioned 14TB 3PAR mesh-active storage array. 
+
+\paragraph{Specific computing facilities.} Computer Science Open Access Lab: This lab is accessible to all students currently enrolled in any course in the department of computer science (128 seats). The lab consists of 128 Dell OptiPlex 980 machines with i7-870 Processor (8M Cache, 2.93 GHz), 4GB RAM, 22'' (Dell P2210) flat-panel display, Windows 7, 64-bit; Two HP Laserjet 9040 printers are also located in the lab. The lab is open from 8am to 11pm, M-F, and 11pm-7pm Sat/Sun. The Lab is maintained by the CS Tech Staff. A monitor (typically a graduate student hired half-time) is on premises all the time.
+
+Graduate Windows Lab: This 15 seat lab is accessible to all graduate students.  Equipment consists of Dell Precision T1650 computers with Intel XEON CPU E3 1225 v2, @3.20GHz, 8GB RAM, 24'' flat-panel monitors, Windows 7 Enterprise and an HP Laserjet P4015n printer. The lab is accessible 24/7 with smart card access.
+
+Project Design Lab: This 20 seat lab is accessible to all CS undergraduate/graduate students who take senior design project class. It consists of  Dell Optiplex 760 machines with Intel Core2 Duo, E8400@3.00GHz, 2GB RAM, 17''flat-panel monitors, Windows 7 Enterprise. The lab is accessible 24/7 with smart card access.
+
+General Access Systems: The Department also maintains several systems in its server room to which remote access is provided. These include the Network Programming System that are ccessible to all CS students enrolled in network programming and parallel processing courses (45 systems); Students access these systems via SSH; All these 45 systems run Linux CentOS 6.2 x86\_64. The Department also maintains two large Linux compute servers (Linux CentOS 6.2 x86\_64, Dell PowerEdge R710 w/2 six-core 2.53GHz Intel Xeon, 32GB RAM) and two large Solaris computer servers (Sun Fire V440 w/4x1GHz UltraSPARC-IIIi, 8GB RAM). 
+
+Server clouds: The Department also maintains a general purpose server cloud, a VMware vSphere 4 operating on 5 ESX hosts with dual 6-core processor 128GB RAM servers, used for teaching the cloud computing related courses as well as a network security courses server cloud,  a VMware vSphere 4 executing on 4 processors of 6-core Opterons, 128GB RAM, and four 4Gb redundant fiber channel SAN connections.
+
+In addition to the above labs and facilities, CS students also have access the UTDesign Studio that is equipped with modern computing facilities and equipment with more than 30,000 square feet of dedicated space, where students and corporate partners can create, innovate, design, build and learn. Further information can be found at $http://www.utdallas.edu/utdesign/corporate/studio/$. The UTDesign studio is primarily used by undergraduate seniors taking the capstone project course.
+
+A 30' x 20' lab is available for Dr. Liu's students. The lab can comfortably accommodate 8 students and the computing equipment. Eight workstations equipped with state-of-the-art NVIDIA GPUs currently in the PI's lab will be available to the project.
+
+%--------------------------------------------------------------------------------------------%
+%xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx%
+%--------------------------------------------------------------------------------------------%
+
+\newpage
+\pagenumbering{gobble}
+
+\begin{center}
+\Large{\textbf{\\Data Management Plan}}
+\end{center}
+
+This data management plan covers all of the data products to be produced in this project. It includes all source code that implements the ecosystem of GPU resource management, any source code added to LITMUS$^{\textrm{RT}}$,  the suite of case-study programs, and scripts used to test and evaluate the implementation of the proposed components, along with the data collected during evaluation efforts. 
+
+\paragraph{Source code.} All source code will be freely available for direct download from public web servers maintained by the UTD Computer Science Department under an open source GPL license.  Additional case-study test programs and scripts will be freely available under the open source BSD license and directly downloadable from public web servers maintained by the UTD Computer Science Department. Our intend in making these data products freely available is that other researchers can verify evaluation results, and relevant research conducted by other interested groups can be facilitated.
+
+\paragraph{Evaluation data.} Evaluation data (including raw data and resulting graphs) can be several terabytes in size. It is thus currently not feasible to make this data available to the public through direct download. We will store and back up such data on secured servers maintained by the UT-Dallas Computer Science Department. Interested parties may request copies of this data through making arrangement for private direct download or using the postal system.
+
+\paragraph{Privacy.} No personal data will be acquired in this project. There are no privacy concerns for the storage of data.
+
+\paragraph{Long-term storage.} All data products produced in this project will also be archived in the UTD computer science computing repository for permanent storage.
+
+%\end{comment}
+
+%--------------------------------------------------------------------------------------------%
+%xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx%
+%--------------------------------------------------------------------------------------------%
+
+\end{document}
