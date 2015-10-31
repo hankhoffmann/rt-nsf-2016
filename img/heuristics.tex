@@ -1,0 +1,81 @@
+\begin{tikzpicture}
+
+\begin{groupplot}[
+    group style={
+        group name=plots,
+        group size=1 by 1,
+        xlabels at=edge top,
+        xticklabels at=edge top,
+        vertical sep=5pt
+    },
+axis x line* = top,
+xlabel near ticks,
+major x tick style = transparent,
+height=3.5cm,
+%width=0.95\columnwidth,
+width=4.2cm,
+xmin=0,
+xmax=3,
+enlargelimits=false,
+tick align = outside,
+tick style={white},
+ytick=\empty,
+xtick=\empty,
+xticklabels={},
+yticklabels={},
+]
+\nextgroupplot[ylabel={\footnotesize Energy},
+ylabel shift={6mm},
+ymin=0,
+ymax=1,
+]
+
+
+\end{groupplot}
+
+\begin{groupplot}[
+    group style={
+        group name=plots,
+        group size=1 by 1,
+        xlabels at=edge bottom,
+        xticklabels at=edge bottom,
+        vertical sep=5pt
+    },
+axis x line* = bottom,
+xlabel near ticks,
+major x tick style = transparent,
+height=3.5cm,
+%width=0.95\columnwidth,
+width=4.2cm,
+xmin=0,
+xmax=3,
+enlargelimits=false,
+tick align = outside,
+tick style={white},
+ytick=\empty,
+xticklabel shift={-5pt},
+%x tick label style={rotate=0, anchor=south},
+xlabel={\footnotesize $Platform$},xtick={1,2,3},
+xticklabels={{\scriptsize $\mathsf{Vaio}$},
+{\footnotesize $\mathsf{ODROID}$}},
+ymin=1,
+ymax=2.25,
+ytick={1.0,1.25,1.5,1.75,2.0},
+yticklabels={1.00,1.25,1.50,1.75,2.00,2.25},
+legend cell align=left, 
+legend style={ column sep=1ex },
+ymajorgrids,
+grid style={dashed},
+]
+\nextgroupplot[ybar=\pgflinewidth,
+bar width=5pt,
+legend entries = {{\scriptsize $\mathsf{never~idle}$},{\scriptsize $\mathsf{race~to~idle}$}},
+legend style={draw=none,legend columns=2,at={(0.5,1.35)},anchor=north},
+]
+\addplot table[x index=0,y index=2, col sep=space] {img/heuristics2.txt};
+\addplot table[x index=0,y index=3, col sep=space] {img/heuristics2.txt};
+
+
+\end{groupplot}
+
+\end{tikzpicture}
