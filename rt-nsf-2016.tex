@@ -59,6 +59,39 @@
 
 \usepackage{tikz}
 
+\usepackage{pgfplots}
+% options for pgfplots
+\pgfplotsset{compat=1.8,compat/show suggested version=false}
+\usetikzlibrary{calc,trees,arrows,patterns,plotmarks,shapes,snakes,er,3d,automata,backgrounds,topaths,decorations.pathmorphing,decorations.markings}
+%\pgfplotsset{compat=newest}
+\pgfplotsset{
+   /pgfplots/bar  cycle  list/.style={/pgfplots/cycle  list={%
+        {black,fill=black!30!white,mark=none},%
+        {black,fill=red!30!white,mark=none},%
+        {black,fill=green!30!white,mark=none},%
+        {black,fill=yellow!30!white,mark=none},%
+        {black,fill=brown!30!white,mark=none},%
+     }
+   },
+}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=out/]
+\tikzexternalize
+% don't externalize todonotes
+%\makeatletter
+%\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+%\makeatother
+% end of externalization
+\usetikzlibrary{patterns}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{
+every axis label/.append style={font=\footnotesize},
+tick label style={font=\footnotesize},
+}
+%\usepackage[normalem]{ulem}
+%\setlength{\abovecaptionskip}{2pt plus 2pt minus 2pt}
+%\setlist{noitemsep,topsep=0pt}
+
 \usepackage{wrapfig}
 
 \usepackage[utf8]{inputenc}
