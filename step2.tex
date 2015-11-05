@@ -1,0 +1,67 @@
+In step 2, we will develop new algorithms and techniques that address
+energy consumption for mixed critical real-time systems such as
+automotive computing.  In both cases, we plan to leverage two key
+insights about heterogeneous architectures like those presented in
+Figure~\ref{tradeoffs}:
+\begin{itemize}
+\item Their energy efficiency increases as they slow down.
+\item They have tremendous additional compute capacity that can only
+  be used for short amounts of time.
+\end{itemize}
+
+Specifically, we will develop two techniques, each based off one of
+these insights, and each providing a different capability:
+\begin{itemize}
+\item \textbf{Pace-to-sprint}: The goal of this technique is to reduce
+  energy consumption for hard real-time workloads.  Where traditional
+  techniques allocate for worst case and then idle if work is
+  completed early (i.e., race-to-idle), pace-to-sprint will develop
+  scheduling techniques to spend as much time as possible in slower,
+  more energy-efficient states.
+\item \textbf{Energy Guarantees}: The goal of this technique will be
+  to guarantee energy consumption for mixed critical workloads; i.e.,
+  workloads that contain jobs with both hard and soft real-time
+  requirements.  In this work, we will use the additional,
+  unsustainable compute capacity to process hard real-time tasks and
+  ensure that their deadlines are respected (building off our work in
+  step 1).  In addition, we will develop algorithms and interfaces for
+  admitting additional soft real-time jobs that will only be scheduled
+  if they do not violate energy constraints.  Thus, this technique
+  will allow us to bound both timeliness and energy consumption,
+  possibly at the cost of not executing some non-critical tasks.
+\end{itemize}
+
+
+\subsubsection{Pace-to-Sprint}
+We will develop pace-to-sprint techniques to minimize energy
+consumption.  The key insight here is that allocating for worst case
+execution time...
+
+Linear optimization?
+
+
+
+
+\subsubsection{Energy Guarantees for Mixed Critical Workloads}
+We will develop techniques to provide energy consumption guarantees
+for systems with both hard and soft real-time requirements.
+
+Take energy budget.  Divide into periods.  Determine average power per
+scheduling period.
+
+Hard real-time tasks scheduled using big cores.  When those complete,
+determine remaining available power.  Run best-effort tasks in
+configuration that meets available power requirement.
+
+
+\subsubsection{Evaluation}
+
+We will evaluate our techniques along two metrics: energy consumption
+and schedulability.
+
+Energy consumption of pace-to-sprint should be lower than existing
+techniques, specific savings will depend on workload, but maybe a
+factor of two better than race.
+
+Schedulability of our guaranteed techniques should be higher than
+current techniques.
