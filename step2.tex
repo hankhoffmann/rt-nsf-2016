@@ -34,34 +34,134 @@ these insights, and each providing a different capability:
 
 \subsubsection{Pace-to-Sprint}
 We will develop pace-to-sprint techniques to minimize energy
-consumption.  The key insight here is that allocating for worst case
-execution time...
+consumption for workloads with hard real-time requirements.  The key
+insight here is that allocating for worst case execution time wastes
+energy, yet many application's have average-case behavior
+significantly less demanding than their worst case behavior.  On our
+target systems, allocating for worst case is not practical, as such an
+allocation would violate thermal constraints (see Figure
+\ref{tradeoffs}).  Where traditional approaches would start with worst
+case allocation and transition to an idle state when they finish, in
+this approach we will begin execution in an energy-efficient state.
+If the current job is not a worst-case job, then it will finish in
+this energy-efficient mode.  As it is executing, if its time in the
+energy efficient state exceeds some threshold, then we will
+transition to a thermally unsustainable, yet fast resource allocation
+to ensure timing deadlines are met.
 
-Linear optimization?
+More formally, assume a set of jobs starts at time $0$ and must
+complete $W$ units of work by time $t$. The system supports $C$
+configurations $c \in \{0,\dots,C-1\}$, each of which has a
+computation rate $s_c$ and a power consumption of $p_c$. These
+configurations represent settings for all configurable components in
+the system (e.g., DRAM speed, processor speed, and number of active
+cores).  Here, we assume these values are known based on our work in
+Step 1. The system has a unique \emph{idle} configuration $c = 0$ with
+$s_0 = 0$ and $p_0 = p_{idle}$, where $p_{idle}$ is a system dependent
+(and workload independent) value representing the system's power
+consumption when not executing a computation. We assume configuration
+$C-1$ represents making all resources available to a workload.  The
+goal is to assign a time $0 \le t_c \le t$ to each machine
+configuration.  Note that configuration $c$ will contribute $t_c \cdot
+s_c$ work at a cost of $p_c \cdot t_c$ energy.  We have used similar
+formulations in our prior work \cite{LEO,POET,kim-cpsna}. Thus, the
+problem of minimizing energy while completing the work can be
+expressed as:
+\begin{align*}
+minimize~& \sum_c t_c \cdot p_c \tag{1} \label{eqn:1}\\
+subject~to~\\
+& \sum_c t_c \cdot s_c = W \tag{2} \label{eqn:2}\\
+& \sum_c t_c = t \tag{3} \label{eqn:3}\\
+& 0 \le t_c \le t,~for~c = 0,\dots,C-1 \tag{4} \label{eqn:4}
+\end{align*}
 
+Equations \ref{eqn:1}--\ref{eqn:4} assign values for all $t_c$ to
+minimize total energy consumption (Equation \ref{eqn:1}) subject to the
+constraints that the total work accomplished is equal to the required
+work $W$ (Equation \ref{eqn:2}) and the deadline is met (Equation
+\ref{eqn:3}). The final constraint ensures that the time spent in any
+configuration is non-negative.
+
+The traditional, race-to-idle approach represents a heuristic solution
+to this optimization which uses only two configurations: $C-1$, where
+all resources are available and $0$ which idles the machine.  Our
+proposed approach is to develop new heuristics that beat race-to-idle.
+In the past we have developed heuristics that are appropriate to soft
+real-time schedules \cite{POET,EMSOFT}.  In the proposed work, we will
+extend these heuristics and develop new algorithms to ensure hard
+real-time deadlines.  
+
+Specifically, we will look for solutions that use the configuration
+$e$ as much as possible, where $e$ represents the most energy
+efficient configuration; i.e., $\forall c \,\,\, r_e /p_e \ge
+r_c/p_c$.  We will determine how long the system can stay in that
+configuration before it risks violating timing and we will then
+transition to a faster (and less energy efficient configuration) to
+ensure that timing constraints are not violated.  We will examine
+algorithms for determining when to switch both statically and
+dynamically.  Two insights drive this work: 1) when jobs finish faster
+than worst case, we will not have wasted energy, because we will have
+been operating in the most energy efficient configuration and 2) when
+jobs are in danger of violating timing we can switch to a
+computationally intensive configuration that will ensure safety.
 
 
 
 \subsubsection{Energy Guarantees for Mixed Critical Workloads}
 We will develop techniques to provide energy consumption guarantees
-for systems with both hard and soft real-time requirements.
+for systems with both hard and soft real-time requirements.  The basic
+intuition in this step will be to divide the tasks into two groups.
+For hard real-time tasks, we will guarantee deadlines are met.  For
+soft real-time tasks we will apply a best-effort approach. 
 
-Take energy budget.  Divide into periods.  Determine average power per
-scheduling period.
+We will realize this approach by dividing scheduling periods into two
+fixed-sized quanta.  In the first, we will schedule hard real-time
+tasks which may require high power consumption.  In the second quanta,
+we will determine the remaining average power consumption that will
+meet the energy goal given the remaining time.  During this second
+time quantum, we will set the system to a resource configuration that
+is guaranteed not to exceed the required power and schedule as many
+soft real-time tasks as possible.
 
-Hard real-time tasks scheduled using big cores.  When those complete,
-determine remaining available power.  Run best-effort tasks in
-configuration that meets available power requirement.
+More formally, we will meet an energy budget $E$ for a scheduling
+period by dividing this period into two quanta: $t_h$ for scheduling
+hard real-time tasks and $t_s$ for scheduling soft real-time tasks.
+Using results from step 1, we will configure the system to use
+resources that are guaranteed to schedule the hard real-time tasks and
+measure the energy consumption $E_h$.  We then know the remaining
+energy available for the soft real-time tasks is $E_s = E - E_h$.
+Since the time allocated for soft real-time tasks is fixed, we simply
+determine the power consumption that respects the energy goal $P_s =
+E_s/t_s$.  We will then configure the system to a resource usage that
+is guaranteed not to exceed this power consumption.
+
+\emph{We believe this ability to guarantee energy consumption for an
+  embedded real-time system is a new capability not previously
+  available.}
 
 
 \subsubsection{Evaluation}
+We will evaluate our techniques developed in step 2 using two metrics:
+\begin{itemize}
+\item \textbf{Energy Consumption:} We will instrument boards with
+  commercially available power and energy sensors.  We expect that
+  pace-to-sprint should exhibit lower energy consumption than existing
+  techniques.  While specific savings will vary with workload, our
+  preliminary results (Figure \ref{tradeoffs}) show that energy
+  reductions of up to $2 \times$ are possible compared to the commonly
+  used race-to-idle heuristic.  When evaluating our ability to provide
+  energy guarantees, we will measure the number of violations that
+  occur for a workload, where a violation means that a scheduling
+  period exceeded its budgeted energy.
+\item \textbf{Schedulability:} We will evaluate pace-to-sprint by
+  ensuring that all hard deadlines are indeed met.  In addition, we
+  will evaluate our ability to provide energy guarantees by
+  determining how many of the soft real-time tasks we can successfully
+  execute.  Clearly, we could execute none and simply idle the
+  processor, but our goal is to execute as many as possible without
+  violating the energy constraints.  We will compare our approach to a
+  static scheme that does not dynamically monitor energy and adjust
+  resource usage.  We hope to show that our approach greatly increases
+  schedulability, allowing more work to be done on the same platform.
+\end{itemize}
 
-We will evaluate our techniques along two metrics: energy consumption
-and schedulability.
-
-Energy consumption of pace-to-sprint should be lower than existing
-techniques, specific savings will depend on workload, but maybe a
-factor of two better than race.
-
-Schedulability of our guaranteed techniques should be higher than
-current techniques.
