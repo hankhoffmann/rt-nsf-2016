@@ -1,5 +1,5 @@
  
-\subsubsection{Architecture Trends}
+\subsubsection{Heterogeneous Single-ISA Processor Architectures}
 Modern computing systems are constrained by \emph{dark silicon};
 \emph{i.e.}, not all transistors can be powered at all times
 \cite{DaSi2011,Venkatesh2010}.  The emergence of dark silicon has led
@@ -12,8 +12,8 @@ single-ISA} designs improve energy efficiency by executing computation
 on the most appropriate type of core.
 
 While these processors present a wide range of performance and energy
-tradeoffs, they create a difficult scheduling problem.  Not only, does
-a software scheduler have to map tasks to core types, it also most
+tradeoffs, they create a difficult scheduling problem.  Not only does
+a software scheduler have to map tasks to core types, it also must
 ensure that energy is minimized (to increase battery life) and that
 critical power threshholds are not violated.  For example, the Exynos
 5 processor (based on an ARM big.LITTLE architecture \cite{bigLittle})
@@ -23,72 +23,80 @@ second \cite{exynos5}.  In addition, our prior work has shown that
 this processor achieves greater energy efficiency as it slows down
 \cite{Imes2014}.  
 
-Such a processor desing creates both a challenge and an opportunity
-for real-time embedded processing. The challenge is how to ensure that
+Such a processor design creates both a challenge and an opportunity
+for real-time embedded processing. The challenge is ensuring that
 timing constraints are met while operating in the most
-energy-efficient configuration.  The opportunity comes from the fact
-that the processor is overprovisioned, it has a much higher compute
-capacity than it can safely sustain.  This extra compute capacity
-could be used in short bursts to prevent timing errors.  The next
-section illustrates these concepts with empirical results.
+energy-efficient configuration.  The opportunity arises because the
+processor is overprovisioned --- it has a much higher compute capacity
+than it can safely sustain.  This extra compute capacity could be used
+in short bursts to prevent timing errors.  The next section
+illustrates these concepts with empirical results.
 
-\subsubsection{Preliminary Results}
+\subsubsection{Preliminary Results on Energy Efficiency and Timeliness for big.LITTLE Processors}
 
 \begin{table*}[th]
 \caption{Two embedded platforms with different configurable components.}
 \label{tbl:machines}
 \scriptsize 
 \centering
-\begin{tabular}{lcccccccc}
+\begin{tabular}{lcccccc}
   \textbf{Type} & 
   \textbf{Processor} &
   \textbf{Cores} & 
   \textbf{Core Types} &
   \textbf{Speeds (GHz)} &
-  \textbf{TurboBoost} &
-  \textbf{HyperThreads} & 
+  %\textbf{TurboBoost} &
+  %\textbf{HyperThreads} & 
   \textbf{Idle Power (W)} & 
   \textbf{Configurations} \\
   \hline
   \hline
-  Homogeneous   & Intel Haswell Mobile       & 2 & 1 & .6--1.5  & yes & yes & 2.5 & 45 \\
-  Heterogeneous & Samsung Exynos5 Octa & 8 & 2 (A15 \& A7) & .8--1.6 (A15) .5-1.2 (A7) & no & no & 0.12 & 69 \\
+  Homogeneous   & Intel Haswell Mobile       & 2 & 1 & .6--1.5  & 2.5 & 45 \\
+  big.LITTLE & Samsung Exynos5 Octa & 8 & 2 (A15, big \& A7, LITTLE) & .8--1.6 (A15) .5-1.2 (A7) & 0.12 & 69 \\
   \hline 
   \hline
 \end{tabular}
 \vskip -.7em
 \end{table*}
 
-We use an example application to compare the different tradeoffs on a
-heterogeneous single-ISA processor and a homogeneous multicore.  As a
-target application, we use a video encoder, composed of jobs, where
-each job encodes a frame. We instrument the encoder to report job
-latency and measure each processor's energy consumption.  The two
-processors have different configurable resources, shown in
-Table~\ref{tbl:machines}.
+We use an example application -- the x264 video encoder -- to compare
+the different tradeoffs on an ARM big.LITTLE processor and a
+traditional homogeneous multicore.  The video encoder is composed of
+jobs, where each job encodes a frame. We instrument the encoder to
+report job latency and measure each processor's energy consumption.
+The two processors have different configurable resources, shown in
+Table~\ref{tbl:machines}. The comparison of the two platforms is shown
+in Figure~\ref{x264-motivation}.
 
-\begin{comment}
+%\begin{comment}
 \begin{figure}[t]
 \vskip -1.8em
-\subfloat[Energy/Latency Tradeoffs]%
-{\input{img/tradeoffs.tex}%
+\subfloat[Energy/Latency Tradeoffs]{\input{img/tradeoffs.tex}
 \label{fig:x264-motivation-tradeoffs}}
-\subfloat[Energy Consumption]%
-{\input{img/heuristics.tex}%
+\subfloat[Heuristic Energy Consumption]
+{\input{img/heuristics.tex}
 \label{fig:x264-motivation-heuristics}}
-\caption{Energy/latency tradeoffs.}
+%  \subfloat[Intel Haswell]%
+%  {\input{img/tradeoffs-v.tex}%
+%  \label{fig:pwr-perf-vaio}}
+\subfloat[ARM big.LITTLE Power/performance]%
+{\input{img/tradeoffs-o.tex}%
+\label{fig:pwr-perf-odroid}}
+\caption{Characterization of ARM big.LITTLE processor for latency and energy tradeoffs (a), different resource allocation heuristics (b), and power and performance tradeoffs (c).}
 \label{fig:x264-motivation}
 \end{figure}
-\end{comment}
+%\end{comment}
 
-The different shapes of these tradeoff spaces lead to different
-optimal resource allocation strategies. Empirical studies show that
-the \emph{race~to~idle} heuristic, which makes all resources available
-and then idles after completing a job, is near optimal on systems like
-the homogeneous
+Figure~\ref{x264-motivation-tradeoffs} shows the latency and energy
+tradeoffs of the video encoder on our two test platforms.  The
+different shapes of these tradeoff spaces on the ARM big.LITTLE and
+the homogeneous system lead to different optimal resource allocation
+strategies. Empirical studies show that the \emph{race~to~idle}
+heuristic, which makes all resources available and then idles after
+completing a job, is near optimal on systems like the homogeneous
 processor~\cite{PowerSlope,Hoelzle2009,google,Imes2014,HotPower}.  On
-systems like the heterogeneous processor, recent approaches save
-energy by keeping the system constantly busy and
+systems like the big.LITTLE processor, recent approaches save energy
+by keeping the system constantly busy and
 \emph{never~idle}~\cite{Carroll13,LeSueur11,Lin2010,Imes2014,HotPower}.
 
 To demonstrate how different scheduling decisions affect the different
@@ -105,11 +113,24 @@ homogeneous processor, \emph{race~to~idle} is near optimal, but
 \emph{never~idle} is near optimal for the heterogeneous processor, but
 \emph{race~to~idle} consumes $2 \times$ more energy.
 
-These results demonstrate two key points:
+Finally, we note that due to the presence of dark silicon in the ARM
+big.LITTLE, there is additional compute power that can be brought to
+bear temporarily, but cannot be sustained.
+Figure~\ref{x264-motivation-tradeoffs} illustrates this property as it
+shows the power and performance tradeoffs for the video encoder (all
+normalized so that 1 is the maximum).  The horizontal dashed line
+represents the maximum sustainable power without active cooling.  Note
+two important properties of this figure: 1) the maximum performance is
+almost 33\% higher than the sustainable performance and 2) the only
+configurations that are guaranteed never to violate safe operating
+power dissipation are those that use the little cores.
+
+On the whole, the results in Figure~\ref{x264-motivation} demonstrate
+two key points:
 \begin{itemize}
 \item The conventional approach of allocating all resources and
 transitioning to a low power idle state is extremely inefficient on
 the heterogeneous processor.  
-\item The heterogeneous processor can
-reach speeds of up to XX faster than it can safely sustain.
+\item The heterogeneous processor can reach speeds of up to $1.33
+  \times$ faster than it can safely sustain.
 \end{itemize}

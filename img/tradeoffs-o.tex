@@ -1,0 +1,65 @@
+\begin{tikzpicture}
+\begin{centering}
+
+
+\definecolor{s1}{RGB}{228, 26, 28}
+\definecolor{s2}{RGB}{55, 126, 184}
+\definecolor{s3}{RGB}{77, 175, 74}
+\definecolor{s4}{RGB}{152, 78, 163}
+\definecolor{s5}{RGB}{255, 127, 0}
+
+\begin{groupplot}[
+    group style={
+        group name=plots,
+        group size=1 by 1,
+        xlabels at=edge bottom,
+        xticklabels at=edge bottom,
+        vertical sep=5pt
+    },
+xlabel={\footnotesize $Power$ 
+%(normalized to worst case)
+},
+xlabel near ticks,
+height=3.5cm,
+width=0.3\columnwidth,
+%width = 4.5cm,
+xmajorgrids,
+ymajorgrids,
+grid style={dashed},
+xtick={0,0.25,0.5,0.75,1.0},
+xticklabels={0,0.25,0.5,0.75,1.0},
+xticklabel style={font=\footnotesize},
+xmin=0,
+xmax=1.1,
+yticklabel pos=left,
+enlargelimits=false,
+tick align = outside,
+tick style={white},
+xticklabel shift={-5pt},
+yticklabel shift={-5pt},
+ylabel shift={-2pt},
+ylabel style={align=center},
+unbounded coords=jump,
+]
+
+\nextgroupplot[ylabel={\footnotesize Performance}, 
+%ylabel shift={6mm},
+ytick={0,0.25,0.5,0.75,1.0},
+yticklabels={0,0.25,0.5,0.75,1.0},
+yticklabel style={font=\footnotesize},
+ymin=0,
+ymax=1.1,
+legend entries={{\scriptsize $\mathsf{1}$},{\scriptsize $\mathsf{2}$},{\scriptsize $\mathsf{3}$},{\scriptsize $\mathsf{4}~cores$},{\scriptsize $\mathsf{sustainable~power}$}},
+legend style={draw=none,at={(0.5,1.35)},anchor=north,legend columns=5,line width=5pt},
+]
+\addplot[thick, solid, color=s4, only marks, mark=square*] table[x index=15,y index=14,col sep=comma] {img/tradeoffs-o.csv};
+\addplot[thick, solid, color=s3, only marks, mark=square*] table[x index=13,y index=12,col sep=comma] {img/tradeoffs-o.csv};
+\addplot[thick, solid, color=s2, only marks, mark=square*] table[x index=11,y index=10,col sep=comma] {img/tradeoffs-o.csv};
+\addplot[thick, solid, color=s1, only marks, mark=square*] table[x index=9,y index=8,col sep=comma] {img/tradeoffs-o.csv};
+\addplot[very thick, dashed, black] coordinates {(.49,0) (.49, 1)};
+
+
+\end{groupplot}
+\end{centering}
+
+\end{tikzpicture}
