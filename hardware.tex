@@ -15,7 +15,7 @@ While these processors present a wide range of performance and energy
 tradeoffs, they create a difficult scheduling problem.  Not only does
 a software scheduler have to map tasks to core types, it also must
 ensure that energy is minimized (to increase battery life) and that
-critical power threshholds are not violated.  For example, the Exynos
+critical power thresholds are not violated.  For example, the Exynos
 5 processor (based on an ARM big.LITTLE architecture \cite{bigLittle})
 has a 5.5W peak power that is nearly $2 \times$ the maximum
 sustainable heat dissipation, limiting peak speed to less than 1
@@ -27,7 +27,7 @@ Such a processor design creates both a challenge and an opportunity
 for real-time embedded processing. The challenge is ensuring that
 timing constraints are met while operating in the most
 energy-efficient configuration.  The opportunity arises because the
-processor is overprovisioned --- it has a much higher compute capacity
+processor is over-provisioned --- it has a much higher compute capacity
 than it can safely sustain.  This extra compute capacity could be used
 in short bursts to prevent timing errors.  The next section
 illustrates these concepts with empirical results.
