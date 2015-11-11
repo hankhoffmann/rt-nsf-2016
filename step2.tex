@@ -1,12 +1,12 @@
 In step 2, we will develop new algorithms and techniques that address
 energy consumption for mixed critical real-time systems such as
 automotive computing.  In both cases, we plan to leverage two key
-insights about heterogeneous architectures like those presented in
-Figure~\ref{tradeoffs}:
+insights about heterogeneous architectures like the ARM big.LITTLE
+presented in Figure~\ref{tradeoffs}:
 \begin{itemize}
 \item Their energy efficiency increases as they slow down.
-\item They have tremendous additional compute capacity that can only
-  be used for short amounts of time.
+\item Due to dark silicon, they have additional compute capacity that
+  can only be used for short amounts of time.
 \end{itemize}
 
 Specifically, we will develop two techniques, each based off one of
@@ -15,20 +15,18 @@ these insights, and each providing a different capability:
 \item \textbf{Pace-to-sprint}: The goal of this technique is to reduce
   energy consumption for hard real-time workloads.  Where traditional
   techniques allocate for worst case and then idle if work is
-  completed early (i.e., race-to-idle), pace-to-sprint will develop
-  scheduling techniques to spend as much time as possible in slower,
-  more energy-efficient states.
+  completed early (i.e., race-to-idle \cite{}), pace-to-sprint will
+  develop scheduling techniques to spend as much time as possible in
+  slower, more energy-efficient states.
 \item \textbf{Energy Guarantees}: The goal of this technique will be
   to guarantee energy consumption for mixed critical workloads; i.e.,
-  workloads that contain jobs with both hard and soft real-time
-  requirements.  In this work, we will use the additional,
-  unsustainable compute capacity to process hard real-time tasks and
-  ensure that their deadlines are respected (building off our work in
-  step 1).  In addition, we will develop algorithms and interfaces for
-  admitting additional soft real-time jobs that will only be scheduled
-  if they do not violate energy constraints.  Thus, this technique
-  will allow us to bound both timeliness and energy consumption,
-  possibly at the cost of not executing some non-critical tasks.
+  workloads that contain jobs with both hard timing constraints and
+  best effort requirements.  Specifically, we will use the
+  unsustainable, but high performance configurations (to the right of
+  the dashed line in Figure~\ref{pwr-perf-odroid}) to schedule hard
+  real-time tasks and then use low-power sustainable configurations
+  (to the left of the dashed line in Figure~\ref{pwr-perf-odroid}) to
+  schedule other tasks while the processor cools down. 
 \end{itemize}
 
 
@@ -40,14 +38,15 @@ energy, yet many application's have average-case behavior
 significantly less demanding than their worst case behavior.  On our
 target systems, allocating for worst case is not practical, as such an
 allocation would violate thermal constraints (see Figure
-\ref{tradeoffs}).  Where traditional approaches would start with worst
-case allocation and transition to an idle state when they finish, in
-this approach we will begin execution in an energy-efficient state.
-If the current job is not a worst-case job, then it will finish in
-this energy-efficient mode.  As it is executing, if its time in the
-energy efficient state exceeds some threshold, then we will
-transition to a thermally unsustainable, yet fast resource allocation
-to ensure timing deadlines are met.
+\ref{pwr-perf-odroid}).  Where traditional approaches would start with
+worst case allocation and transition to an idle state when they
+finish, in this approach we will begin execution in an
+energy-efficient state.  If the current job is not a worst-case job,
+then it will finish in this energy-efficient mode.  As it is
+executing, if its time in the energy efficient state exceeds some
+predetermined threshold, then we will transition to a thermally
+unsustainable, yet fast resource allocation to ensure timing deadlines
+are met.
 
 More formally, assume a set of jobs starts at time $0$ and must
 complete $W$ units of work by time $t$. The system supports $C$
@@ -55,10 +54,11 @@ configurations $c \in \{0,\dots,C-1\}$, each of which has a
 computation rate $s_c$ and a power consumption of $p_c$. These
 configurations represent settings for all configurable components in
 the system (e.g., DRAM speed, processor speed, and number of active
-cores).  Here, we assume these values are known based on our work in
-Step 1. The system has a unique \emph{idle} configuration $c = 0$ with
-$s_0 = 0$ and $p_0 = p_{idle}$, where $p_{idle}$ is a system dependent
-(and workload independent) value representing the system's power
+cores).  Here, we assume these values are known based on the results
+of the schedulability analysis work we will perform in Step 1. The
+system has a unique \emph{idle} configuration $c = 0$ with $s_0 = 0$
+and $p_0 = p_{idle}$, where $p_{idle}$ is a system dependent (and
+workload independent) value representing the system's power
 consumption when not executing a computation. We assume configuration
 $C-1$ represents making all resources available to a workload.  The
 goal is to assign a time $0 \le t_c \le t$ to each machine
@@ -84,7 +84,7 @@ configuration is non-negative.
 
 The traditional, race-to-idle approach represents a heuristic solution
 to this optimization which uses only two configurations: $C-1$, where
-all resources are available and $0$ which idles the machine.  Our
+all resources are available and $0$, which idles the machine.  Our
 proposed approach is to develop new heuristics that beat race-to-idle.
 In the past we have developed heuristics that are appropriate to soft
 real-time schedules \cite{POET,EMSOFT}.  In the proposed work, we will
@@ -112,7 +112,9 @@ We will develop techniques to provide energy consumption guarantees
 for systems with both hard and soft real-time requirements.  The basic
 intuition in this step will be to divide the tasks into two groups.
 For hard real-time tasks, we will guarantee deadlines are met.  For
-soft real-time tasks we will apply a best-effort approach. 
+all other tasks we consider two groups: soft real-time where latency
+is bounded and best effort where we simply complete as much work as
+possible, but offer no guarantees.
 
 We will realize this approach by dividing scheduling periods into two
 fixed-sized quanta.  In the first, we will schedule hard real-time
@@ -121,27 +123,35 @@ we will determine the remaining average power consumption that will
 meet the energy goal given the remaining time.  During this second
 time quantum, we will set the system to a resource configuration that
 is guaranteed not to exceed the required power and schedule as many
-soft real-time tasks as possible.
+additional tasks as possible.  For soft real-time tasks, we will
+develop new, \emph{energy-aware} admission algorithms that will only
+allow new soft real-time tasks to enter the system if their latency
+bound can be met.  For best-effort tasks, we will simply admit as many
+as possible -- after all hard and soft real-time tasks have been
+scheduled -- and suspend them when needed.
 
 More formally, we will meet an energy budget $E$ for a scheduling
 period by dividing this period into two quanta: $t_h$ for scheduling
 hard real-time tasks and $t_s$ for scheduling soft real-time tasks.
 Using results from step 1, we will configure the system to use
-resources that are guaranteed to schedule the hard real-time tasks and
-measure the energy consumption $E_h$.  We then know the remaining
-energy available for the soft real-time tasks is $E_s = E - E_h$.
-Since the time allocated for soft real-time tasks is fixed, we simply
-determine the power consumption that respects the energy goal $P_s =
-E_s/t_s$.  We will then configure the system to a resource usage that
-is guaranteed not to exceed this power consumption.
+combinations of big and LITTLE cores that are guaranteed to schedule
+the hard real-time tasks and measure system energy consumption $E_h$.
+We then know the remaining energy available for the remaining tasks is
+$E_s = E - E_h$.  Since the time allocated for these remaining tasks
+is fixed, we simply determine the power consumption that respects the
+energy goal $P_s = E_s/t_s$.  We will then configure the system to a
+resource usage that is guaranteed not to exceed this power
+consumption.  At that point we will admit soft real-time tasks that
+can be scheduled with these resources and finally admit any best
+effort tasks once all real-time tasks have been scheduled.
 
-\emph{We believe this ability to guarantee energy consumption for an
-  embedded real-time system is a new capability not previously
-  available.}
+\emph{We believe this technique will provide a new capability for
+  embedded real-time systems: guaranteeing both hard real-time and
+  energy consumption. Providing both is essential for cyber physical
+  systems that rely on battery power.}
 
-
-\subsubsection{Evaluation}
-We will evaluate our techniques developed in step 2 using two metrics:
+We will measure the effectiveness of this new capability using two
+metrics:
 \begin{itemize}
 \item \textbf{Energy Consumption:} We will instrument boards with
   commercially available power and energy sensors.  We expect that
