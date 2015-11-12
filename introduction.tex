@@ -12,7 +12,7 @@ Recently, the microprocessor industry has adopted heterogeneous multi-core proce
 
 \vspace{2mm} \noindent \textbf{Two Fundamentally Conflicting Goals of
 Heterogeneous Computing in CPS: Timing Correctness and Energy
-Guarantees.} When timing correctness takes the form of hard real-time
+Guarantees.} When timing correctness (i.e., enabling timing constraints to be analytically validated at design time) takes the form of hard real-time
 constraints, timing and energy efficiency are fundamentally in
 conflict \cite{conflict-book}. The conflict arises because hard
 real-time guarantees require reserving resources sufficient for worst
@@ -25,9 +25,17 @@ than allocating for the current case --- a fact which has been
 demonstrated both analytically \cite{Albers2011,Bansal2011,Irani} and
 empirically \cite{LeSueur11,HotPower,Imes2014a,PowerSlope}. Of course,
 hard timing guarantees are a requirement for correct operation of
-cyberphysical systems, and their strict size, weight, and power (SWaP)
+CPS,\footnote{The functional correctness of most CPS hinges crucially upon the temporal correctness, as the control operations depend on the processing of certain environmental sensing and computation tasks} and their strict size, weight, and power (SWaP)
 requirements -- as well as common reliance on battery power -- demand
 low energy consumption.
+
+\vspace{2mm} \noindent \textbf{Proposed approach.} Establishing timing correctness requires real-time resource allocation methods. Most existing works on real-time resource allocation in heterogeneous systems focus on guaranteeing timing correctness (e.g., see \cite{raravi2014task, raravi2013assigning, niemeier2011partitioned} for an overview). %Existing works on energy-efficient real-time resource allocation for homogeneous systems~\cite{?} cannot be efficiently applied herein because 
+ A couple of recently conducted works~\cite{liuenergy, colin2014energy} seek to explore timing-energy tradeoffs when designing resource allocation methods for heterogeneous systems. 
+ Unfortunately, such works fail to maximize energy efficiency for two reasons. First, they use the same design philosophy created for homogeneous systems; i.e., they make scheduling decisions based purely on timing-related concerns and then reduce energy consumption on a ``best-effort'' basis. While heterogeneous processors are generally more efficient than homogeneous ones, we argue that fundamental energy efficiency due to using a heterogeneous platform cannot be achieved without \textit{considering heterogeneous energy characteristics of tasks and processors as a ``first-class citizen'' when making scheduling decisions}. Such energy heterogeneity can be dramatic for many workloads (see Sec.~\ref{sec:hardware} for details). Second, the existing works make the following critical assumption: all processor cores can operate at max speed all the time while sustaining safe power dissipation.
+  This assumption is unfortunately invalid due to the critical ``dark silicon'' effect; i.e., essentially all processors are over-provisioned and have much larger maximum compute capacity than they can safely sustain\cite{?}. Motivated by these observations, our goal is to simultaneously achieve timing correctness and energy efficiency on heterogeneous platforms by: \textbf{(\textit{i}) identifying the most energy-efficient resource allocation methods that guarantee timing correctness on a heterogeneous platform} and
+   \textbf{(\textit{ii}) developing aggressive energy-oriented resource allocation methods that exploit dark silicon, where heterogeneous processors have tremendous additional compute capacity that can only be used for short amounts of time}. Such methods would aggressively achieve significant energy savings while being able to avoid timing errors by utilizing the over-provisioned processing capacity in short bursts.
+
+
 
 \begin{comment}
 
@@ -50,12 +58,17 @@ On one hand, real-time resource allocation methods often need to maximize resour
   Besides this challenge, the heterogeneity among cores can greatly complicate resource allocation because ``choices'' must be made when selecting the core upon which a task will execute. When jointly considering timing correctness and energy efficiency in the presence of such heterogeneity and dynamic computing needs, resource allocation becomes even more complicated and interesting due to the huge design space of exploring timing-energy tradeoffs. Resolving these issues will be the focus of this proposal.
 \end{comment}
 
-\vspace{2mm} \noindent \textbf{Proposed approach.} 
-Most existing works on real-time resource allocation in heterogeneous systems focus on guaranteeing timing correctness (e.g., see \cite{raravi2014task, raravi2013assigning, niemeier2011partitioned} for an overview). %Existing works on energy-efficient real-time resource allocation for homogeneous systems~\cite{?} cannot be efficiently applied herein because 
+% The old ``proposed approach'' paragraph.
+\begin{comment}
+
+\vspace{2mm} \noindent \textbf{Proposed approach.} Most existing works on real-time resource allocation in heterogeneous systems focus on guaranteeing timing correctness (e.g., see \cite{raravi2014task, raravi2013assigning, niemeier2011partitioned} for an overview). %Existing works on energy-efficient real-time resource allocation for homogeneous systems~\cite{?} cannot be efficiently applied herein because 
  A couple of recently conducted works~\cite{liuenergy, colin2014energy} seek to explore timing-energy tradeoffs when designing resource allocation methods for heterogeneous systems. 
  Unfortunately, such works fail to maximize energy efficiency for two reasons. First, they use the same design philosophy created for homogeneous systems; i.e., they make scheduling decisions based purely on timing-related concerns and then reduce energy consumption on a ``best-effort'' basis. While heterogeneous processors are generally more efficient than homogeneous ones, we argue that fundamental energy efficiency due to using a heterogeneous platform cannot be achieved without considering \textit{heterogeneous energy characteristics of tasks and processors as a ``first-class citizen'' when making scheduling decisions}. Second, the existing works make the following critical assumption: all processor cores can operate at max speed all the time while sustaining safe power dissipation.
   This assumption is unfortunately invalid due to the critical ``dark silicon'' effect; i.e., essentially all processors are over-provisioned and have much larger maximum compute capacity than they can safely sustain\cite{?}. Motivated by these observations, our goal is to simultaneously achieve timing correctness and energy efficiency on heterogeneous platforms by: \textbf{(\textit{i}) identifying the most energy-efficient resource allocation methods that guarantee timing correctness on a heterogeneous platform} and
    \textbf{(\textit{ii}) developing aggressive energy-oriented resource allocation methods that exploit dark silicon, where heterogeneous processors have tremendous additional compute capacity that can only be used for short amounts of time}. Such methods would aggressively achieve significant energy savings while being able to avoid timing errors by utilizing the over-provisioned processing capacity in short bursts.
+  
+\end{comment}
+  
   
 \begin{comment}
 We intend to show that the fundamental timing-energy tradeoffs can be explored by leveraging recent research by PI Liu's research group that has led to a new set of \textit{optimal} resource allocation algorithms for  heterogeneous multicore-based systems containing processors with varying speeds~\cite{Tong14a, Zhou2014a}. These algorithms can analytically guarantee fast and bounded response times for tasks  executed in a heterogeneous computing system.  %while minimizing the communication latency among tasks with data dependency if allocated to different nodes in the system. 
