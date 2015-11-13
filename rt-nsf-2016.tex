@@ -134,13 +134,80 @@ tick label style={font=\footnotesize},
 \Large{\textbf{Project Summary}}
 \end{center}
 
-\paragraph{Summary.}
+\paragraph{Summary}
+The physical constraints of thermal and power dissipation have led to
+the emergence of \emph{dark silicon} in embedded processor designs.
+Dark silicon refers to the fact that not all transistors can be
+powered at full speed all the time --- doing so would destroy the chip
+--- so some set of transistors must be kept dark --- unpowered.  To
+address this issue, embedded processor designers have turned to
+heterogeneous processor designs which combine powerful, but energy
+inefficient cores, with slow, but energy efficient ones.
 
-\paragraph{Intellectual merit.} 
+The combination of dark silicon and heterogeneous processor designs
+creates both a challenge and an opportunity for embedded systems
+designers and embedded operating systems in particular.  Embedded
+operating systems must support hard real-time requirements and work to
+reduce energy consumption.  The challenge of heterogeneous designs is
+that real time-schedulers must now incorporate knowledge of differing
+core types and reason about the diverse design space of scheduling
+options that arise from multiple core types on the same chip.  The
+opportunity is that dark silicon effectively creates a ``reserve'' of
+additional computing power that can be brought to bear in short bursts
+(but is not sustainable without damaging the hardware).  
 
-\paragraph{Broader impacts.}
+\emph{This proposal's goal is to create new real-time scheduling
+  algorithms for embedded systems that both address the challenge and
+  exploit the opportunity of heterogeneous processor designs and dark
+  silicon.}
+
+
+\paragraph{Intellectual Merit} 
+We seek to develop new real-time scheduling algorithms for
+heterogeneous multicores that (1) are more energy efficient than the
+current state-of-the-art and (2) can provide a new capability:
+guaranteeing both timing and energy consumption for embedded
+workloads.  While prior work has addressed real-time support on
+heterogeneous architectures, it has primarily focused on porting
+existing techniques developed for homogeneous systems and ensuring
+that they can still meet hard real-time guarantees.  When ported to
+heterogeneous systems, existing techniques are more energy efficient,
+but this gain is entirely due to the processor architecture and not an
+inherent feature of the algorithm.  The key insight in our proposed
+work will be to start from scratch and incorporate knowledge of
+heterogeneity and energy into our proposed algorithms from the
+beginning of the project.  This approach promises to lead to new
+algorithms that have better energy efficiency and offer new
+capabilities.
+
+We plan to evaluate these algorithms both analytically and
+empirically.  Our empirical test case will be automotive computing, a
+rich embedded processing domain that includes safety critical tasks,
+like collision detection, and best effort tasks like infotainment.  We
+will test the energy savings and schedulability of our algorithms by
+implementing them for an state-of-the-art ARM big.LITTLE heterogeneous
+embedded multicore and using them to schedule a representative
+automotive workload.  We will demonstrate the proposed algorithms'
+energy efficiency and ability to increase schedulability for the
+automotive workload on real heterogeneous processors.
+
+\paragraph{Broader Impacts}
+The proposed research agenda provides for significant broader impacts
+related to (1) curriculum development and student training through
+integration of modules in existing real-time, energy-aware, and system
+design courses, and (2) outreach through established enrichment
+programs at the participating universities. The proposed research
+benefits society by directly addressing the needs of smart
+cyberphysical systems such as self-driving cars, embedded medical
+devices, and intelligent robotics.  Such systems play critical roles
+in manufacturing, defense, and healthcare. The proposed research
+benefits cyberphysical systems by (1) enabling greater functionality
+and new capabilities for the same cost and (2) greatly reducing system
+energy consumption, perhaps leading to medical devices that last
+longer or systems that need to be replaced less often.
 
 \paragraph{Keywords:} 
+Real-time; operating systems; embedded; energy; heterogeneous multicore; scheduling
 
 %---------------------------------------------------------------------------------%
 %*********************************************************************************%
