@@ -66,7 +66,7 @@ jobs, where each job encodes a frame. We instrument the encoder to
 report job latency and measure each processor's energy consumption.
 The two processors have different configurable resources, shown in
 Table~\ref{tbl:machines}. The comparison of the two platforms is shown
-in Figure~\ref{x264-motivation}.
+in Table~\ref{tbl:machines}.
 
 %\begin{comment}
 \begin{figure}[h]
@@ -92,7 +92,7 @@ in Figure~\ref{x264-motivation}.
 \end{figure}
 %\end{comment}
 
-Figure~\ref{x264-motivation-tradeoffs} shows the latency and energy
+Figure~\ref{fig:x264-motivation} shows the latency and energy
 tradeoffs of the video encoder on our two test platforms.  The
 different shapes of these tradeoff spaces on the ARM big.LITTLE and
 the homogeneous system lead to different optimal resource allocation
@@ -109,7 +109,7 @@ platforms, we compare the energy consumption of both race-to-idle and
 never-idle.  We set a latency target equal to the worst observed
 latency for this application on each processor and measure the energy
 consumption of encoding 500 video frames using each heuristic.
-Figure~\ref{x264-motivation-heuristics} shows the results, normalized to
+Figure~\ref{fig:x264-motivation} shows the results, normalized to
 the optimal energy found by measuring every possible resource
 configuration for each frame.  Both heuristics meet the latency
 target, but their energy consumptions vary tremendously. On the
@@ -121,7 +121,7 @@ homogeneous processor, \emph{race~to~idle} is near optimal, but
 Finally, we note that due to the presence of dark silicon in the ARM
 big.LITTLE, there is additional compute power that can be brought to
 bear temporarily, but cannot be sustained.
-Figure~\ref{x264-motivation-tradeoffs} illustrates this property as it
+Figure~\ref{fig:x264-motivation} illustrates this property as it
 shows the power and performance tradeoffs for the video encoder (all
 normalized so that 1 is the maximum).  The horizontal dashed line
 represents the maximum sustainable power without active cooling.  Note
@@ -130,7 +130,7 @@ almost 33\% higher than the sustainable performance and 2) the only
 configurations that are guaranteed never to violate safe operating
 power dissipation are those that use the little cores.
 
-On the whole, the results in Figure~\ref{x264-motivation} demonstrate
+On the whole, the results in Figure~\ref{fig:x264-motivation} demonstrate
 two key points that will guide our proposed research:
 \begin{itemize}
 \item The conventional approach of allocating all resources and

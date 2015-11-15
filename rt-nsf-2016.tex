@@ -8,7 +8,7 @@
 \setlength{\textwidth}{6.5in}     %%                                   %%
 \setlength{\oddsidemargin}{0in}   %% (It is recommended that you       %%
 \setlength{\evensidemargin}{0in}  %%  not change these parameters,     %%
-\setlength{\textheight}{8.5in}    %%  at the risk of having your       %%
+\setlength{\textheight}{8.67in}    %%  at the risk of having your       %%
 \setlength{\topmargin}{0in}       %%  proposal dismissed on the basis  %%
 \setlength{\headheight}{-40pt}      %%  of incorrect formatting!!!)      %%
 \setlength{\headsep}{65pt}         %%                                   %%
@@ -95,6 +95,15 @@ tick label style={font=\footnotesize},
 
 \usepackage{wrapfig}
 
+
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}%
+  {\z@}{1.25ex \@plus 1ex \@minus .2ex}{-1em}%
+  {\normalfont\normalsize\bfseries}%
+}
+\makeatother
+
 %\usepackage[utf8]{inputenc}
 
 
@@ -118,18 +127,21 @@ tick label style={font=\footnotesize},
 
 %\doublespace
 
+
 \begin{document}
 
 %\layout
 
-\maketitle
-\pagenumbering{arabic}
+%\maketitle
 
+
+%\pagenumbering{arabic}
 
 %---------------------------------------------------------------------------------%
 %*********************************************************************************%
 %---------------------------------------------------------------------------------%
-\newpage 
+\thispagestyle{empty}
+
 
 \begin{center}
 \Large{\textbf{Project Summary}}
@@ -150,7 +162,7 @@ creates both a challenge and an opportunity for embedded systems
 designers and embedded operating systems in particular.  Embedded
 operating systems must support hard real-time requirements and work to
 reduce energy consumption.  The challenge of heterogeneous designs is
-that real time-schedulers must now incorporate knowledge of differing
+that real-time schedulers must now incorporate knowledge of differing
 core types and reason about the diverse design space of scheduling
 options that arise from multiple core types on the same chip.  The
 opportunity is that dark silicon effectively creates a ``reserve'' of
@@ -210,10 +222,14 @@ longer or systems that need to be replaced less often.
 \paragraph{Keywords:} 
 Real-time; operating systems; embedded; energy; heterogeneous multicore; scheduling
 
+
 %---------------------------------------------------------------------------------%
 %*********************************************************************************%
 %---------------------------------------------------------------------------------%
-\newpage 
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
 
 \section{Introduction}
 \label{sec:intro}
@@ -483,17 +499,65 @@ A 30' x 20' lab is available for Dr. Liu's students. The lab can comfortably acc
 \Large{\textbf{\\Data Management Plan}}
 \end{center}
 
-This data management plan covers all of the data products to be produced in this project. It includes all source code that implements the ecosystem of GPU resource management, any source code added to LITMUS$^{\textrm{RT}}$,  the suite of case-study programs, and scripts used to test and evaluate the implementation of the proposed components, along with the data collected during evaluation efforts. 
+This data management plan covers all of the data products to be produced in this project. It includes all source code that implements the energy-efficient real-time resource allocation algorithms, any source code added to LITMUS$^{\textrm{RT}}$,  the suite of case-study programs, and scripts used to test and evaluate the implementation of the proposed components, along with the data collected during evaluation efforts. 
 
-\paragraph{Source code.} All source code will be freely available for direct download from public web servers maintained by the UTD Computer Science Department under an open source GPL license.  Additional case-study test programs and scripts will be freely available under the open source BSD license and directly downloadable from public web servers maintained by the UTD Computer Science Department. Our intend in making these data products freely available is that other researchers can verify evaluation results, and relevant research conducted by other interested groups can be facilitated.
+\vspace{1mm}
+\noindent \textbf{Source code.} All source code will be freely available for direct download from public web servers maintained by the University of Texas at Dallas Computer Science Department under an open source GPL license.  Additional case-study test programs and scripts will be freely available under the open source BSD license and directly downloadable from public web servers maintained by the UTD Computer Science Department. Our intend in making these data products freely available is that other researchers can verify evaluation results, and relevant research conducted by other interested groups can be facilitated.
 
-\paragraph{Evaluation data.} Evaluation data (including raw data and resulting graphs) can be several terabytes in size. It is thus currently not feasible to make this data available to the public through direct download. We will store and back up such data on secured servers maintained by the UT-Dallas Computer Science Department. Interested parties may request copies of this data through making arrangement for private direct download or using the postal system.
+\vspace{1mm}
+\noindent \textbf{Evaluation data.} Evaluation data (including raw data and resulting graphs) can be several terabytes in size. It is thus currently not feasible to make this data available to the public through direct download. We will store and back up such data on secured servers maintained by the University of Texas at Dallas Computer Science Department. Interested parties may request copies of this data through making arrangement for private direct download or using the postal system.
 
-\paragraph{Privacy.} No personal data will be acquired in this project. There are no privacy concerns for the storage of data.
+\vspace{1mm}
+\noindent \textbf{Data Format and Metadata Standards: } We intend to share the measurement/trace data using comma-separated values (CSV) format, which is a set of file formats used to store tabular data in which numbers and text are stored in a plain-text form that can be easily written and read in a text editor.  It is very easy for others to convert this format into more advanced data format at user's discretion.  We will provide readme files to explain the data format and contextual details (metadata and instructions) for understanding and processing these data files. Source code and simulation programs will be stored in their respective native
+formats, for example ��.m�� for Matlab code, ��.c/cpp�� for C/C++ code. Simulation and experimental results
+will be stored in ��.dat�� or ��.fig�� formats. Project reports, conference, and journal papers will be in either
+Microsoft Word (��.doc�� or ��.docx��) format, or Latex format.
 
-\paragraph{Long-term storage.} All data products produced in this project will also be archived in the UTD computer science computing repository for permanent storage.
+\vspace{1mm}
+\noindent \textbf{Data Sharing, Distribution and Preservation Plan: }
+We plan to make publicly available the electronic raw trace data produced under this project as well as the associated metadata that describes the
+experimental setup, modeling methodology and data analysis methods. We also plan to make publicly
+available the analyzed data in the forms of peer-reviewed conference, journal articles, thesis, and book
+chapters. The electronic data will be preserved in multiple on-site RAID hard drive storages at the
+University of Texas at Dallas and  and University of Minnesota.
+The data will be shared through the web server provided by the University of Texas at Dallas or through direct
+contact with the PIs. Data will be available for access and sharing as soon as the proposed research has
+been accomplished, or no more than two years after the acquisition of the data. 
+We will also share our tools and publications with the CPS research community through the CPS Virtual Organization (VO). The data will be preserved for at least three years beyond the award period, as required by NSF guidelines. Since the data format we
+choose is CVS, which can be easily edited and converted, we expect no problem to archive and transform
+our electronic trace data in the foreseeable future after the project has been completed. All data products produced in this project will also be archived in the UTD computer science computing repository for permanent storage.
 
-%\end{comment}
+
+\vspace{1mm}
+\noindent \textbf{Privacy.} No personal data will be acquired in this project. There are no privacy concerns for the storage of data.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{center}
+\Large\textbf{Collaboration Plan}
+\end{center} \normalsize
+
+\vspace{6mm}
+\large \noindent\textbf{1 \ \ Regular Communication and Reporting}\normalsize
+\vspace{4mm}
+
+\noindent The proposed research activities will be carried out at two different universities: The University of Texas at Dallas and University of Chicago. The entire team will participate in a bi-weekly on-line meeting through free online teleconference services. In addition, as one of the budget line items, one domestic trip per year is arranged for bringing Dr. Hoffman and any of his supported students in this project to the University of Texas at Dallas together. A written progress report on all supported activities will be produced on a quarterly basis.
+
+\vspace{6mm}
+\large \noindent\textbf{2 \ \ Team Formation and Specific Roles}\normalsize
+\vspace{4mm}
+
+\noindent Our team consists of two experts in the general fields of real-time systems, operating systems, heterogeneous processor design, and power optimization. PI Liu has rich experience in operating systems support for heterogeneous real-time systems~\cite{Liu12, GPES, zhou2015supporting, Zhou2014a} and real-time resource allocation on heterogeneous computing platforms~\cite{Tong14a, LiuRTSS14a, LiuRTSS15, Liu1, Liu2, Liu6, Liu7, Liu10, liu2014supporting, LiuRTSS14b, elliott1minimizing, Liu3, Liu4, Liu5, Liu9, Liu11, Liu13}.
+PI Hoffman has rich experience in homogeneous\cite{raw1,raw2,raw3,tilera1,tilera2} and heterogeneneous \cite{ASAP,HPEC,ASAP2,ISSoC} processor design as well as operating systems support for managing performance and power tradeoffs \cite{LEO,POET,DynamicKnobs,JouleGuard,PTRADE,ICAC,TCST,HotPower,CPSNA}.
+
+ In this project, the University of Texas at Dallas will assume a management and coordination role. The University of Texas at Dallas will be responsible for maintaining a central project repository where tools will be integrated and data will be collected. These tools and data will be made available to the community. The specific roles of the project participants in all organizations involved are described as follows.
+\begin{itemize}
+\item Dr. Liu will be responsible for designing, analyzing, and evaluating energy-efficient configurations for heterogeneous platforms that simultaneously guarantee timing correctness.
+\item Dr. Hoffman will lead the research on the design and analysis of the techniques to aggressively address energy optimization and guarantees. 
+\item The two PIs intend to  work closely together on the implementation and evaluation of the proposed approaches.
+\end{itemize}
+
 
 %--------------------------------------------------------------------------------------------%
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx%
