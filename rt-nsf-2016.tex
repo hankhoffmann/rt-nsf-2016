@@ -8,7 +8,7 @@
 \setlength{\textwidth}{6.5in}     %%                                   %%
 \setlength{\oddsidemargin}{0in}   %% (It is recommended that you       %%
 \setlength{\evensidemargin}{0in}  %%  not change these parameters,     %%
-\setlength{\textheight}{8.5in}    %%  at the risk of having your       %%
+\setlength{\textheight}{8.67in}    %%  at the risk of having your       %%
 \setlength{\topmargin}{0in}       %%  proposal dismissed on the basis  %%
 \setlength{\headheight}{-40pt}      %%  of incorrect formatting!!!)      %%
 \setlength{\headsep}{65pt}         %%                                   %%
@@ -94,6 +94,15 @@ tick label style={font=\footnotesize},
 
 \usepackage{wrapfig}
 
+
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}%
+  {\z@}{1.25ex \@plus 1ex \@minus .2ex}{-1em}%
+  {\normalfont\normalsize\bfseries}%
+}
+\makeatother
+
 %\usepackage[utf8]{inputenc}
 
 
@@ -117,18 +126,21 @@ tick label style={font=\footnotesize},
 
 %\doublespace
 
+
 \begin{document}
 
 %\layout
 
-\maketitle
-\pagenumbering{arabic}
+%\maketitle
 
+
+%\pagenumbering{arabic}
 
 %---------------------------------------------------------------------------------%
 %*********************************************************************************%
 %---------------------------------------------------------------------------------%
-\newpage 
+\thispagestyle{empty}
+
 
 \begin{center}
 \Large{\textbf{Project Summary}}
@@ -149,7 +161,7 @@ creates both a challenge and an opportunity for embedded systems
 designers and embedded operating systems in particular.  Embedded
 operating systems must support hard real-time requirements and work to
 reduce energy consumption.  The challenge of heterogeneous designs is
-that real time-schedulers must now incorporate knowledge of differing
+that real-time schedulers must now incorporate knowledge of differing
 core types and reason about the diverse design space of scheduling
 options that arise from multiple core types on the same chip.  The
 opportunity is that dark silicon effectively creates a ``reserve'' of
@@ -209,10 +221,14 @@ longer or systems that need to be replaced less often.
 \paragraph{Keywords:} 
 Real-time; operating systems; embedded; energy; heterogeneous multicore; scheduling
 
+
 %---------------------------------------------------------------------------------%
 %*********************************************************************************%
 %---------------------------------------------------------------------------------%
-\newpage 
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
 
 \section{Introduction}
 \label{sec:intro}
