@@ -2,7 +2,7 @@ In step 2, we will develop new algorithms and techniques that address
 energy consumption for mixed critical real-time systems such as
 automotive computing.  In both cases, we plan to leverage two key
 insights about heterogeneous architectures like the ARM big.LITTLE
-presented in Figure~\ref{tradeoffs}:
+presented in Figure~\ref{fig:x264-motivation-tradeoffs}:
 \begin{itemize}
 \item Their energy efficiency increases as they slow down.
 \item Due to dark silicon, they have additional compute capacity that
@@ -24,9 +24,9 @@ these insights, and each providing a different capability:
   workloads that contain jobs with both hard timing constraints and
   best effort requirements.  Specifically, we will use the
   unsustainable, but high performance configurations (to the right of
-  the dashed line in Figure~\ref{pwr-perf-odroid}) to schedule hard
+  the dashed line in Figure~\ref{fig:pwr-perf-odroid}) to schedule hard
   real-time tasks and then use low-power sustainable configurations
-  (to the left of the dashed line in Figure~\ref{pwr-perf-odroid}) to
+  (to the left of the dashed line in Figure~\ref{fig:pwr-perf-odroid}) to
   schedule other tasks while the processor cools down. 
 \end{itemize}
 
@@ -39,7 +39,7 @@ energy, yet many application's have average-case behavior
 significantly less demanding than their worst case behavior.  On our
 target systems, allocating for worst case is not practical, as such an
 allocation would violate thermal constraints (see Figure
-\ref{pwr-perf-odroid}).  Where traditional approaches would start with
+\ref{fig:pwr-perf-odroid}).  Where traditional approaches would start with
 worst case allocation and transition to an idle state when they
 finish, in this approach we will begin execution in an
 energy-efficient state.  If the current job is not a worst-case job,
@@ -158,7 +158,7 @@ metrics:
   commercially available power and energy sensors.  We expect that
   pace-to-sprint should exhibit lower energy consumption than existing
   techniques.  While specific savings will vary with workload, our
-  preliminary results (Figure \ref{tradeoffs}) show that energy
+  preliminary results (Figure \ref{fig:x264-motivation-tradeoffs}) show that energy
   reductions of up to $2 \times$ are possible compared to the commonly
   used race-to-idle heuristic.  When evaluating our ability to provide
   energy guarantees, we will measure the number of violations that
