@@ -144,7 +144,7 @@ tick label style={font=\footnotesize},
 
 
 \begin{center}
-\Large{\textbf{Project Summary}}
+\Large{\textbf{CSR:Small:Exploring Timing-Energy Tradeoffs on Heterogeneous Computing Platforms: Project Summary}}
 \end{center}
 
 \paragraph{Summary}
@@ -152,7 +152,7 @@ The physical constraints of thermal and power dissipation have led to
 the emergence of \emph{dark silicon} in embedded processor designs.
 Dark silicon refers to the fact that not all transistors can be
 powered at full speed all the time --- doing so would destroy the chip
---- so some set of transistors must be kept dark --- unpowered.  To
+--- so some set of transistors must be kept dark; i.e., unpowered.  To
 address this issue, embedded processor designers have turned to
 heterogeneous processor designs which combine powerful, but energy
 inefficient cores, with slow, but energy efficient ones.
@@ -160,14 +160,14 @@ inefficient cores, with slow, but energy efficient ones.
 The combination of dark silicon and heterogeneous processor designs
 creates both a challenge and an opportunity for embedded systems
 designers and embedded operating systems in particular.  Embedded
-operating systems must support hard real-time requirements and work to
-reduce energy consumption.  The challenge of heterogeneous designs is
-that real-time schedulers must now incorporate knowledge of differing
-core types and reason about the diverse design space of scheduling
-options that arise from multiple core types on the same chip.  The
-opportunity is that dark silicon effectively creates a ``reserve'' of
-additional computing power that can be brought to bear in short bursts
-(but is not sustainable without damaging the hardware).  
+operating systems must support hard real-time requirements and
+minimize energy consumption.  The challenge of heterogeneous designs
+is that real-time schedulers must now incorporate knowledge of
+differing core types and reason about the diverse design space of
+scheduling options that arise from multiple core types on the same
+chip.  The opportunity is that dark silicon effectively creates a
+``reserve'' of additional computing power that can be brought to bear
+in short bursts, but is not sustainable without damaging the hardware.
 
 \emph{This proposal's goal is to create new real-time scheduling
   algorithms for embedded systems that both address the challenge and
@@ -196,7 +196,7 @@ capabilities.
 We plan to evaluate these algorithms both analytically and
 empirically.  Our empirical test case will be automotive computing, a
 rich embedded processing domain that includes safety critical tasks,
-like collision detection, and best effort tasks like infotainment.  We
+like collision detection, and best effort tasks, like infotainment.  We
 will test the energy savings and schedulability of our algorithms by
 implementing them for an state-of-the-art ARM big.LITTLE heterogeneous
 embedded multicore and using them to schedule a representative
@@ -207,17 +207,17 @@ automotive workload on real heterogeneous processors.
 \paragraph{Broader Impacts}
 The proposed research agenda provides for significant broader impacts
 related to (1) curriculum development and student training through
-integration of modules in existing real-time, energy-aware, and system
-design courses, and (2) outreach through established enrichment
-programs at the participating universities. The proposed research
-benefits society by directly addressing the needs of smart
+integration of modules in existing real-time, energy-aware, and
+embedded system design courses, and (2) outreach through established
+enrichment programs at the participating universities. The proposed
+research benefits society by directly addressing the needs of smart
 cyberphysical systems such as self-driving cars, embedded medical
 devices, and intelligent robotics.  Such systems play critical roles
-in manufacturing, defense, and healthcare. The proposed research
-benefits cyberphysical systems by (1) enabling greater functionality
-and new capabilities for the same cost and (2) greatly reducing system
-energy consumption, perhaps leading to medical devices that last
-longer or systems that need to be replaced less often.
+in manufacturing, national security, and healthcare. The proposed
+research benefits cyberphysical systems by (1) enabling greater
+functionality and new capabilities for the same cost and (2) greatly
+reducing system energy consumption, perhaps leading to medical devices
+that last longer or systems that need to be replaced less often.
 
 \paragraph{Keywords:} 
 Real-time; operating systems; embedded; energy; heterogeneous multicore; scheduling
@@ -319,7 +319,7 @@ Real-time; operating systems; embedded; energy; heterogeneous multicore; schedul
 \pagenumbering{gobble}
 
 \bibliographystyle{plain} 
-\bibliography{b1,b2,b3,b4}
+\bibliography{b1,b2,b3,b4,hank}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -549,12 +549,12 @@ our electronic trace data in the foreseeable future after the project has been c
 \vspace{4mm}
 
 \noindent Our team consists of two experts in the general fields of real-time systems, operating systems, heterogeneous processor design, and power optimization. PI Liu has rich experience in operating systems support for heterogeneous real-time systems~\cite{Liu12, GPES, zhou2015supporting, Zhou2014a} and real-time resource allocation on heterogeneous computing platforms~\cite{Tong14a, LiuRTSS14a, LiuRTSS15, Liu1, Liu2, Liu6, Liu7, Liu10, liu2014supporting, LiuRTSS14b, elliott1minimizing, Liu3, Liu4, Liu5, Liu9, Liu11, Liu13}.
-PI Hoffman has rich experience in homogeneous\cite{raw1,raw2,raw3,tilera1,tilera2} and heterogeneneous \cite{ASAP,HPEC,ASAP2,ISSoC} processor design as well as operating systems support for managing performance and power tradeoffs \cite{LEO,POET,DynamicKnobs,JouleGuard,PTRADE,ICAC,TCST,HotPower,CPSNA}.
+PI Hoffmann has rich experience in homogeneous\cite{raw1,raw2,raw3,tilera1,tilera2} and heterogeneneous \cite{ASAP,HPEC,ASAP2,ISSoC} processor design as well as operating systems support for managing performance and power tradeoffs \cite{LEO,POET,DynamicKnobs,JouleGuard,PTRADE,PCP,TCST,HotPower,kim-cpsna}.
 
  In this project, the University of Texas at Dallas will assume a management and coordination role. The University of Texas at Dallas will be responsible for maintaining a central project repository where tools will be integrated and data will be collected. These tools and data will be made available to the community. The specific roles of the project participants in all organizations involved are described as follows.
 \begin{itemize}
 \item Dr. Liu will be responsible for designing, analyzing, and evaluating energy-efficient configurations for heterogeneous platforms that simultaneously guarantee timing correctness.
-\item Dr. Hoffman will lead the research on the design and analysis of the techniques to aggressively address energy optimization and guarantees. 
+\item Dr. Hoffmann will lead the research on the design and analysis of the techniques to aggressively address energy optimization and guarantees. 
 \item The two PIs intend to  work closely together on the implementation and evaluation of the proposed approaches.
 \end{itemize}
 

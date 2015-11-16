@@ -21,7 +21,7 @@ has a 5.5W peak power that is nearly $2 \times$ the maximum
 sustainable heat dissipation, limiting peak speed to less than 1
 second \cite{exynos5}.  In addition, our prior work has shown that
 this processor achieves greater energy efficiency as it slows down
-\cite{Imes2014}.  
+\cite{Imes2014,Imes2014a}.  
 
 Such a processor design creates both a challenge and an opportunity
 for real-time embedded processing. The challenge is ensuring that
@@ -32,7 +32,8 @@ than it can safely sustain.  This extra compute capacity could be used
 in short bursts to prevent timing errors.  The next section
 illustrates these concepts with empirical results.
 
-\subsubsection{Preliminary Results on Energy Efficiency and Timeliness for big.LITTLE Processors}
+\subsubsection{Preliminary Results on Energy Efficiency and Timeliness
+  for big.LITTLE Processors}
 
 \begin{table*}[th]
 \caption{Two embedded platforms with different configurable components.}
@@ -87,7 +88,9 @@ in Table~\ref{tbl:machines}.
 %\input{img/tradeoffs-o.tex}%
 \includegraphics{pdf/rt-nsf-2016-figure2.pdf}
 \label{fig:pwr-perf-odroid}}
-\caption{Characterization of ARM big.LITTLE processor for latency and energy tradeoffs (a), different resource allocation heuristics (b), and power and performance tradeoffs (c).}
+\caption{Characterization of ARM big.LITTLE processor for latency and
+  energy tradeoffs (a), different resource allocation heuristics (b),
+  and power and performance tradeoffs (c).}
 \label{fig:x264-motivation}
 \end{figure}
 %\end{comment}
@@ -99,10 +102,10 @@ the homogeneous system lead to different optimal resource allocation
 strategies. Empirical studies show that the \emph{race~to~idle}
 heuristic, which makes all resources available and then idles after
 completing a job, is near optimal on systems like the homogeneous
-processor~\cite{PowerSlope,Hoelzle2009,google,Imes2014,HotPower}.  On
+processor~\cite{PowerSlope,Hoelzle2009,google2,Imes2014,HotPower}.  On
 systems like the big.LITTLE processor, recent approaches save energy
 by keeping the system constantly busy and
-\emph{never~idle}~\cite{Carroll13,LeSueur11,Lin2010,Imes2014,HotPower}.
+\emph{never~idle}~\cite{Carroll13,LeSueur11,Imes2014,HotPower}.
 
 To demonstrate how different scheduling decisions affect the different
 platforms, we compare the energy consumption of both race-to-idle and
