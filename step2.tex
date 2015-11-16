@@ -3,15 +3,15 @@ energy consumption for mixed critical real-time systems such as
 automotive computing.  In both cases, we plan to leverage two key
 insights about heterogeneous architectures like the ARM big.LITTLE
 presented in Figure~\ref{fig:x264-motivation-tradeoffs}:
-\begin{itemize}
+\begin{itemize}\itemsep 0pt \parskip 0pt
 \item Their energy efficiency increases as they slow down.
-\item Due to dark silicon, they have additional compute capacity that
-  can only be used for short amounts of time.
+\item Dark silicon provides reserve compute capacity that can only be
+  used for short amounts of time.
 \end{itemize}
 
-Specifically, we will develop two techniques, each based off one of
-these insights, and each providing a different capability:
-\begin{itemize}
+From these insights we will develop two techniques, each providing a
+different capability:
+\begin{itemize}\itemsep 0pt \parskip 0pt
 \item \textbf{Pace-to-sprint}: The goal of this technique is to reduce
   energy consumption for hard real-time workloads.  Where traditional
   techniques allocate for worst case and then idle if work is
@@ -66,8 +66,11 @@ goal is to assign a time $0 \le t_c \le t$ to each machine
 configuration.  Note that configuration $c$ will contribute $t_c \cdot
 s_c$ work at a cost of $p_c \cdot t_c$ energy.  We have used similar
 formulations in our prior work \cite{LEO,POET,kim-cpsna}. Thus, the
-problem of minimizing energy while completing the work can be
+problem can be
 expressed as:
+
+\begin{wrapfigure}{l}{0.45\textwidth}
+%\begin{figure}
 \begin{align*}
 minimize~& \sum_c t_c \cdot p_c \tag{1} \label{eqn:1}\\
 subject~to~\\
@@ -75,6 +78,8 @@ subject~to~\\
 & \sum_c t_c = t \tag{3} \label{eqn:3}\\
 & 0 \le t_c \le t,~for~c = 0,\dots,C-1 \tag{4} \label{eqn:4}
 \end{align*}
+%\end{figure}
+\end{wrapfigure}
 
 Equations \ref{eqn:1}--\ref{eqn:4} assign values for all $t_c$ to
 minimize total energy consumption (Equation \ref{eqn:1}) subject to the
@@ -119,7 +124,7 @@ possible, but offer no guarantees.
 
 We will realize this approach by dividing scheduling periods into two
 fixed-sized quanta.  In the first, we will schedule hard real-time
-tasks which may require high power consumption.  In the second quanta,
+tasks requiring high power consumption.  In the second quanta,
 we will determine the remaining average power consumption that will
 meet the energy goal given the remaining time.  During this second
 time quantum, we will set the system to a resource configuration that
@@ -153,16 +158,16 @@ effort tasks once all real-time tasks have been scheduled.
 
 We will measure the effectiveness of this new capability using two
 metrics:
-\begin{itemize}
+\begin{itemize}\itemsep 0pt \parskip 0pt
 \item \textbf{Energy Consumption:} We will instrument boards with
-  commercially available power and energy sensors.  We expect that
+  commercially available energy sensors.  We expect that
   pace-to-sprint should exhibit lower energy consumption than existing
   techniques.  While specific savings will vary with workload, our
-  preliminary results (Figure \ref{fig:x264-motivation-tradeoffs}) show that energy
-  reductions of up to $2 \times$ are possible compared to the commonly
-  used race-to-idle heuristic.  When evaluating our ability to provide
-  energy guarantees, we will measure the number of violations that
-  occur for a workload, where a violation means that a scheduling
+  preliminary results (Figure \ref{fig:x264-motivation-tradeoffs})
+  show that up to $2 \times$ energy reduction is possible compared to
+  the commonly used race-to-idle heuristic.  When evaluating our
+  ability to provide energy guarantees, we will measure the number of
+  violations per workload, where a violation means that a scheduling
   period exceeded its budgeted energy.
 \item \textbf{Schedulability:} We will evaluate pace-to-sprint by
   ensuring that all hard deadlines are indeed met.  In addition, we

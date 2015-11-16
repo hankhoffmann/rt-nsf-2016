@@ -1,15 +1,15 @@
  
 \subsubsection{Heterogeneous Single-ISA Processor Architectures}
-Modern computing systems are constrained by \emph{dark silicon};
-\emph{i.e.}, not all transistors can be powered at all times
+Modern computing systems are constrained by \emph{dark silicon}; i.e.,
+not all transistors can be powered at all times
 \cite{DaSi2011,Venkatesh2010}.  The emergence of dark silicon has led
 hardware architects to rethink processor design.  Recent designs
 incorporate differing cores with a common instruction set and
 programming model~\cite{Kumar.2005.heterogeneous,SulemanMQP09}.  Some
 cores are complex with deep pipelines and large issue width, while
 others are much simpler \cite{bigLittle}.  These \emph{heterogeneous
-single-ISA} designs improve energy efficiency by executing computation
-on the most appropriate type of core.
+  single-ISA} designs improve energy efficiency by executing
+computation on the most appropriate type of core.
 
 While these processors present a wide range of performance and energy
 tradeoffs, they create a difficult scheduling problem.  Not only does
@@ -24,13 +24,13 @@ this processor achieves greater energy efficiency as it slows down
 \cite{Imes2014,Imes2014a}.  
 
 Such a processor design creates both a challenge and an opportunity
-for real-time embedded processing. The challenge is ensuring that
+for real-time embedded computing. The challenge is ensuring that
 timing constraints are met while operating in the most
 energy-efficient configuration.  The opportunity arises because the
-processor is over-provisioned --- it has a much higher compute capacity
-than it can safely sustain.  This extra compute capacity could be used
-in short bursts to prevent timing errors.  The next section
-illustrates these concepts with empirical results.
+processor is over-provisioned --- it has a much higher compute
+capacity than it can safely sustain.  This extra compute capacity
+could be used in short bursts to prevent timing errors.  The next
+section illustrates these concepts with empirical results.
 
 \subsubsection{Preliminary Results on Energy Efficiency and Timeliness
   for big.LITTLE Processors}
@@ -135,7 +135,7 @@ power dissipation are those that use the little cores.
 
 On the whole, the results in Figure~\ref{fig:x264-motivation} demonstrate
 two key points that will guide our proposed research:
-\begin{itemize}
+\begin{itemize}\itemsep 0pt \parskip 0pt
 \item The conventional approach of allocating all resources and
 transitioning to a low power idle state is extremely inefficient on
 the big.LITTLE processor.  
